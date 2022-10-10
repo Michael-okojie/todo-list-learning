@@ -1,5 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic import ListView, DetailView
+from .models import Task
 
-def taskList(request):
-    return HttpResponse("To Do List")
+
+class TaskList(ListView):
+    models = Task
+    context_object_name = 'tasks'
+    queryset = Task.objects.all()
+
+
+class TaskDetail(DetailView):
+    model = Task
+    context_object_name = 'task'
+    template_name = 'base/task.html'
+    
